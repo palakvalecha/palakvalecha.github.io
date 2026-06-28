@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Palak Valecha — Software Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:     #ffffff;
+      --hero:   #f7f7f6;
+      --ink:    #111111;
+      --body:   #444444;
+      --muted:  #888888;
+      --light:  #bbbbbb;
+      --rule:   #e8e8e8;
+      --tag:    #f2f2f2;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 5%;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav-logo {
+      font-size: .85rem; font-weight: 600;
+      color: var(--ink); text-decoration: none; letter-spacing: .02em;
+    }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a {
+      font-size: .8rem; font-weight: 400; color: var(--muted);
+      text-decoration: none; transition: color .15s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-cta {
+      font-size: .8rem; font-weight: 500;
+      color: var(--ink); text-decoration: none;
+      padding: .45rem 1.1rem;
+      border: 1px solid var(--ink);
+      transition: background .15s, color .15s;
+    }
+    .nav-cta:hover { background: var(--ink); color: #fff; }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--hero);
+      padding: 9rem 5% 6rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .hero-inner { max-width: 700px; }
+
+    .hero-status {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-size: .75rem; font-weight: 400; color: var(--muted);
+      margin-bottom: 2rem;
+    }
+    .hero-status-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #22c55e;
+    }
+
+    .hero-name {
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 600; line-height: 1.1;
+      letter-spacing: -.02em; color: var(--ink);
+      margin-bottom: .75rem;
+    }
+    .hero-role {
+      font-size: .88rem; font-weight: 400; color: var(--muted);
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-bullets {
+      list-style: none; display: flex; flex-direction: column; gap: .8rem;
+      margin-bottom: 2.8rem;
+    }
+    .hero-bullets li {
+      display: flex; gap: .9rem; align-items: flex-start;
+      font-size: .88rem; font-weight: 300; color: var(--body); line-height: 1.6;
+    }
+    .hero-bullets li::before {
+      content: '–'; color: var(--light); flex-shrink: 0; margin-top: .02rem;
+    }
+
+    .hero-actions {
+      display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+      margin-bottom: 2.8rem;
+    }
+    .btn-solid {
+      font-size: .8rem; font-weight: 500;
+      padding: .7rem 1.6rem;
+      background: var(--ink); color: #fff;
+      text-decoration: none;
+      transition: opacity .15s;
+      display: inline-block;
+    }
+    .btn-solid:hover { opacity: .8; }
+    .btn-text {
+      font-size: .8rem; font-weight: 400; color: var(--muted);
+      text-decoration: none; transition: color .15s;
+    }
+    .btn-text:hover { color: var(--ink); }
+
+    .hero-socials { display: flex; flex-wrap: wrap; gap: 1.6rem; }
+    .hero-social {
+      display: inline-flex; align-items: center; gap: .4rem;
+      font-size: .75rem; font-weight: 400; color: var(--light);
+      text-decoration: none; transition: color .15s;
+    }
+    .hero-social svg { width: 11px; height: 11px; fill: currentColor; }
+    .hero-social:hover { color: var(--muted); }
+
+    /* ── LAYOUT ── */
+    .section { padding: 5rem 5%; max-width: 1060px; margin: 0 auto; }
+
+    .section-head {
+      display: flex; align-items: baseline; gap: 1rem;
+      padding-bottom: .9rem; margin-bottom: 3rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .section-label {
+      font-size: .7rem; font-weight: 500; color: var(--light);
+      letter-spacing: .08em; text-transform: uppercase;
+    }
+    .section-title {
+      font-size: 1.1rem; font-weight: 600; color: var(--ink);
+    }
+
+    .page-rule { max-width: 1060px; margin: 0 auto; height: 1px; background: var(--rule); }
+
+    /* ── ABOUT ── */
+    .about-grid { display: grid; grid-template-columns: 190px 1fr; }
+
+    .about-stats {
+      border-right: 1px solid var(--rule); padding-right: 2.5rem;
+      display: flex; flex-direction: column; gap: 2rem;
+    }
+    .stat-num {
+      font-size: 2.2rem; font-weight: 600; color: var(--ink);
+      line-height: 1; letter-spacing: -.02em;
+    }
+    .stat-label {
+      font-size: .7rem; font-weight: 400; color: var(--muted);
+      margin-top: .25rem; text-transform: uppercase; letter-spacing: .06em;
+    }
+
+    .about-text {
+      padding-left: 2.5rem;
+      font-size: .88rem; color: var(--body); line-height: 1.8; font-weight: 400;
+    }
+    .about-text p + p { margin-top: 1rem; }
+    .about-text strong { color: var(--ink); font-weight: 500; }
+
+    /* ── EXPERIENCE ── */
+    .exp-entry {
+      display: grid; grid-template-columns: 190px 1fr;
+      padding: 2.5rem 0; border-bottom: 1px solid var(--rule);
+    }
+    .exp-label {
+      border-right: 1px solid var(--rule); padding-right: 2.5rem;
+    }
+    .exp-company {
+      font-size: .88rem; font-weight: 600; color: var(--ink); margin-bottom: .25rem;
+    }
+    .exp-location {
+      font-size: .75rem; font-weight: 400; color: var(--muted); margin-bottom: .6rem;
+    }
+    .exp-date {
+      font-size: .72rem; font-weight: 400; color: var(--muted);
+    }
+
+    .exp-content { padding-left: 2.5rem; }
+    .exp-role {
+      font-size: 1rem; font-weight: 600; color: var(--ink); margin-bottom: 1rem;
+    }
+    .exp-points { list-style: none; display: flex; flex-direction: column; gap: .5rem; margin-bottom: 1.2rem; }
+    .exp-points li {
+      font-size: .85rem; color: var(--body); line-height: 1.65;
+      padding-left: 1.1rem; position: relative;
+    }
+    .exp-points li::before {
+      content: '–'; position: absolute; left: 0; color: var(--light);
+    }
+
+    .exp-tags { display: flex; flex-wrap: wrap; gap: .35rem; }
+    .tag {
+      font-size: .7rem; font-weight: 400; color: var(--muted);
+      background: var(--tag); padding: .18rem .6rem;
+    }
+
+    .patent-block {
+      display: flex; gap: .6rem; align-items: flex-start;
+      margin-top: 1.2rem; padding: .85rem 1rem;
+      border: 1px solid var(--rule); background: #fafafa;
+    }
+    .patent-star { color: var(--muted); font-size: .8rem; flex-shrink: 0; line-height: 1.55; }
+    .patent-text { font-size: .8rem; color: var(--body); line-height: 1.55; }
+    .patent-text strong { color: var(--ink); font-weight: 500; }
+
+    /* ── SKILLS ── */
+    .skill-row {
+      display: grid; grid-template-columns: 2.2rem 1fr auto;
+      gap: 1.2rem; align-items: baseline;
+      padding: .95rem 0; border-bottom: 1px solid var(--rule);
+    }
+    .skill-n { font-size: .7rem; font-weight: 400; color: var(--light); }
+    .skill-name { font-size: .88rem; font-weight: 500; color: var(--ink); }
+    .skill-desc { font-size: .78rem; font-weight: 300; color: var(--muted); text-align: right; }
+
+    /* ── EDUCATION ── */
+    .edu-row {
+      display: grid; grid-template-columns: 190px 1fr;
+      padding: 2.5rem 0;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+    .edu-side {
+      border-right: 1px solid var(--rule); padding-right: 2.5rem;
+    }
+    .edu-side-label { font-size: .7rem; font-weight: 400; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+    .edu-main { padding-left: 2.5rem; }
+    .edu-degree { font-size: 1rem; font-weight: 600; color: var(--ink); margin-bottom: .25rem; }
+    .edu-school { font-size: .85rem; color: var(--body); margin-bottom: .85rem; }
+    .edu-pills { display: flex; flex-wrap: wrap; gap: .35rem; }
+    .edu-pill {
+      font-size: .7rem; font-weight: 400; color: var(--muted);
+      background: var(--tag); padding: .18rem .6rem;
+    }
+
+    /* ── GOALS ── */
+    .goals-block {
+      background: var(--hero); border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+    .goals-inner {
+      max-width: 1060px; margin: 0 auto;
+      padding: 5rem 5%;
+    }
+    .goals-label {
+      font-size: .7rem; font-weight: 500; color: var(--muted);
+      letter-spacing: .08em; text-transform: uppercase; margin-bottom: 1.2rem;
+    }
+    .goals-heading {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 600; color: var(--ink);
+      line-height: 1.2; letter-spacing: -.01em;
+      margin-bottom: 1.2rem;
+    }
+    .goals-text {
+      font-size: .88rem; color: var(--body); line-height: 1.8;
+      max-width: 520px; margin-bottom: 2rem; font-weight: 300;
+    }
+    .goals-pills { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .goals-pill {
+      font-size: .75rem; font-weight: 400; color: var(--body);
+      border: 1px solid var(--rule); padding: .35rem .9rem;
+    }
+
+    /* ── CONNECT ── */
+    .connect-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      border: 1px solid var(--rule);
+    }
+    .connect-card {
+      padding: 2rem; border-right: 1px solid var(--rule);
+      text-decoration: none; color: inherit; display: block;
+      transition: background .15s;
+    }
+    .connect-card:last-child { border-right: none; }
+    .connect-card:hover { background: var(--hero); }
+    .connect-card svg { width: 14px; height: 14px; fill: var(--muted); display: block; margin-bottom: .9rem; }
+    .connect-clabel { font-size: .7rem; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; margin-bottom: .35rem; }
+    .connect-value { font-size: .85rem; font-weight: 500; color: var(--ink); margin-bottom: .4rem; }
+    .connect-arrow { font-size: .7rem; color: var(--light); transition: color .15s; }
+    .connect-card:hover .connect-arrow { color: var(--muted); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 2rem 5%;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-l { font-size: .78rem; color: var(--muted); }
+    .footer-r { font-size: .72rem; color: var(--light); }
+
+    /* ── FADE-IN ── */
+    @media (prefers-reduced-motion: no-preference) {
+      .fade-in { opacity: 0; transform: translateY(12px); transition: opacity .5s ease, transform .5s ease; }
+      .fade-in.visible { opacity: 1; transform: none; }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 780px) {
+      .about-grid, .exp-entry, .edu-row { grid-template-columns: 1fr; }
+      .about-stats {
+        border-right: none; padding-right: 0;
+        flex-direction: row; flex-wrap: wrap; gap: 1.5rem;
+        padding-bottom: 2rem; border-bottom: 1px solid var(--rule);
+      }
+      .about-text { padding-left: 0; padding-top: 2rem; }
+      .exp-label { border-right: none; padding-right: 0; padding-bottom: 1.2rem; }
+      .exp-content { padding-left: 0; }
+      .edu-side { border-right: none; padding-right: 0; padding-bottom: 1rem; }
+      .edu-main { padding-left: 0; }
+      .skill-row { grid-template-columns: 2.2rem 1fr; }
+      .skill-desc { display: none; }
+      .connect-grid { grid-template-columns: 1fr; }
+      .connect-card { border-right: none; border-bottom: 1px solid var(--rule); }
+      .connect-card:last-child { border-bottom: none; }
+      nav { padding: 1rem 4%; }
+      .nav-links li:nth-child(n+3) { display: none; }
+    }
+    @media (max-width: 480px) {
+      .nav-links { display: none; }
+      footer { flex-direction: column; gap: .5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">Palak Valecha</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#education">Education</a></li>
+    </ul>
+    <a class="nav-cta" href="#connect">Connect</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-inner">
+
+      <div class="hero-status">
+        <span class="hero-status-dot"></span>
+        Open to Product Engineer Roles
+      </div>
+
+      <h1 class="hero-name">Palak Valecha</h1>
+      <p class="hero-role">Software Engineer &nbsp;·&nbsp; Fintech &nbsp;·&nbsp; Gurgaon, India</p>
+
+      <ul class="hero-bullets">
+        <li>Build financial platforms that serve millions — retirement systems, investment banking workflows, distributed infrastructure at institutional scale.</li>
+        <li>Optimize systems for throughput and precision — co-inventor on a filed patent in distributed system architecture.</li>
+        <li>Moving toward product engineering and solution architecture in fintech, where technical depth meets design and planning.</li>
+      </ul>
+
+      <div class="hero-actions">
+        <a class="btn-solid" href="#connect">Get in touch</a>
+        <a class="btn-text" href="#experience">View experience →</a>
+      </div>
+
+      <div class="hero-socials">
+        <a class="hero-social" href="https://linkedin.com/in/palak-valecha" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          /palak-valecha
+        </a>
+        <a class="hero-social" href="mailto:palakvalecha17@gmail.com">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          palakvalecha17@gmail.com
+        </a>
+        <a class="hero-social" href="tel:+916388085159">
+          <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          +91 63880 85159
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="section-head fade-in">
+      <span class="section-label">Profile</span>
+      <h2 class="section-title">About</h2>
+    </div>
+    <div class="about-grid fade-in">
+      <div class="about-stats">
+        <div>
+          <div class="stat-num">4</div>
+          <div class="stat-label">Years experience</div>
+        </div>
+        <div>
+          <div class="stat-num">3×</div>
+          <div class="stat-label">Promoted at BofA</div>
+        </div>
+        <div>
+          <div class="stat-num">1</div>
+          <div class="stat-label">Patent filed</div>
+        </div>
+        <div>
+          <div class="stat-num">8.0</div>
+          <div class="stat-label">GPA / 10</div>
+        </div>
+      </div>
+      <div class="about-text">
+        <p>
+          I'm a software engineer with <strong>4 years of experience</strong> building financial platforms at scale — from retirement planning systems at <strong>Bank of America</strong> serving US clients, to investment banking workflow optimization at <strong>FNZ, Gurgaon</strong>.
+        </p>
+        <p>
+          I've earned <strong>three promotions in three years</strong> and contributed to a filed patent in distributed systems. What drives me isn't titles — it's the quality of the problems.
+        </p>
+        <p>
+          My next move is into <strong>product engineering</strong>, where technical depth meets design thinking and planning. Building toward becoming a <strong>Solution Architect</strong> who shapes how financial systems work end to end.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="page-rule"></div>
+
+  <!-- EXPERIENCE -->
+  <section class="section" id="experience">
+    <div class="section-head fade-in">
+      <span class="section-label">Career</span>
+      <h2 class="section-title">Experience</h2>
+    </div>
+
+    <div class="exp-entry fade-in">
+      <div class="exp-label">
+        <div class="exp-company">FNZ</div>
+        <div class="exp-location">Gurgaon, India</div>
+        <div class="exp-date">2025 – Present</div>
+      </div>
+      <div class="exp-content">
+        <h3 class="exp-role">Analyst Developer Specialist</h3>
+        <ul class="exp-points">
+          <li>Promoted from Analyst Developer to Specialist within the first year</li>
+          <li>Performance optimization of workflows powering investment banking admin operations</li>
+          <li>Built and tuned authorization systems for large-scale institutional financial platforms</li>
+          <li>Core contributor to admin infrastructure used across the firm's global client base</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="tag">SQL</span>
+          <span class="tag">VB.NET</span>
+          <span class="tag">Authorization Systems</span>
+          <span class="tag">Performance Optimization</span>
+          <span class="tag">Investment Banking</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-entry fade-in">
+      <div class="exp-label">
+        <div class="exp-company">Bank of America</div>
+        <div class="exp-location">India</div>
+        <div class="exp-date">2022 – 2025</div>
+      </div>
+      <div class="exp-content">
+        <h3 class="exp-role">Software Engineer 1A</h3>
+        <ul class="exp-points">
+          <li>Joined as Apprentice — earned three consecutive promotions to Software Engineer 1A</li>
+          <li>Delivered features on a retirement planning platform serving millions of US clients</li>
+          <li>Built across the full stack: C# &amp; .NET backend, Vue.js frontend</li>
+          <li>Contributed to multiple cross-team platform initiatives across distributed engineering orgs</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="tag">C#</span>
+          <span class="tag">.NET</span>
+          <span class="tag">Vue.js</span>
+          <span class="tag">Retirement Planning</span>
+          <span class="tag">Distributed Systems</span>
+        </div>
+        <div class="patent-block">
+          <span class="patent-star">★</span>
+          <div class="patent-text">
+            Co-Inventor — <strong>Patent Filed:</strong> "System for Distributing System Shakedown in Large Distributed Systems"
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="page-rule"></div>
+
+  <!-- SKILLS -->
+  <section class="section" id="skills">
+    <div class="section-head fade-in">
+      <span class="section-label">Stack</span>
+      <h2 class="section-title">Skills</h2>
+    </div>
+    <div class="fade-in">
+      <div class="skill-row">
+        <span class="skill-n">01</span>
+        <span class="skill-name">C# &amp; .NET</span>
+        <span class="skill-desc">Enterprise backend · Bank of America</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-n">02</span>
+        <span class="skill-name">SQL</span>
+        <span class="skill-desc">Query optimization · data pipelines</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-n">03</span>
+        <span class="skill-name">VB.NET</span>
+        <span class="skill-desc">Authorization workflows · investment banking</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-n">04</span>
+        <span class="skill-name">Vue.js</span>
+        <span class="skill-desc">Frontend · client-facing financial tools</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-n">05</span>
+        <span class="skill-name">Fintech Domain</span>
+        <span class="skill-desc">Retirement planning · investment banking</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-n">06</span>
+        <span class="skill-name">Distributed Systems</span>
+        <span class="skill-desc">Architecture · resilience · patent-level thinking</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="page-rule"></div>
+
+  <!-- EDUCATION -->
+  <section class="section" id="education">
+    <div class="section-head fade-in">
+      <span class="section-label">Formation</span>
+      <h2 class="section-title">Education</h2>
+    </div>
+    <div class="edu-row fade-in">
+      <div class="edu-side">
+        <span class="edu-side-label">Degree</span>
+      </div>
+      <div class="edu-main">
+        <div class="edu-degree">B.Tech in Information Technology</div>
+        <div class="edu-school">Banasthali University</div>
+        <div class="edu-pills">
+          <span class="edu-pill">Graduated 2022</span>
+          <span class="edu-pill">GPA 8.0 / 10</span>
+          <span class="edu-pill">Information Technology</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GOALS -->
+  <div class="goals-block" id="goals">
+    <div class="goals-inner">
+      <div class="goals-label fade-in">What's next</div>
+      <h2 class="goals-heading fade-in">Product Engineer → Solution Architect</h2>
+      <p class="goals-text fade-in">
+        Looking for product engineering roles in fintech where I can pair deep technical experience with design thinking and system planning — building toward becoming a Solution Architect who shapes how financial systems are built, end to end.
+      </p>
+      <div class="goals-pills fade-in">
+        <span class="goals-pill">Product Engineering</span>
+        <span class="goals-pill">System Design</span>
+        <span class="goals-pill">Solution Architecture</span>
+        <span class="goals-pill">Fintech Focus</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONNECT -->
+  <section class="section" id="connect">
+    <div class="section-head fade-in">
+      <span class="section-label">Reach out</span>
+      <h2 class="section-title">Let's Connect</h2>
+    </div>
+    <div class="connect-grid fade-in">
+      <a class="connect-card" href="https://linkedin.com/in/palak-valecha" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        <div class="connect-clabel">LinkedIn</div>
+        <div class="connect-value">/in/palak-valecha</div>
+        <div class="connect-arrow">↗</div>
+      </a>
+      <a class="connect-card" href="mailto:palakvalecha17@gmail.com">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        <div class="connect-clabel">Email</div>
+        <div class="connect-value">palakvalecha17@gmail.com</div>
+        <div class="connect-arrow">↗</div>
+      </a>
+      <a class="connect-card" href="tel:+916388085159">
+        <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+        <div class="connect-clabel">Phone</div>
+        <div class="connect-value">+91 63880 85159</div>
+        <div class="connect-arrow">↗</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-l">Palak Valecha &nbsp;·&nbsp; 2026</span>
+    <span class="footer-r">Gurgaon, India</span>
+  </footer>
+
+  <script>
+    const io = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.08 }
+    );
+    document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>
